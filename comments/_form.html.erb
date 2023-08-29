@@ -1,0 +1,10 @@
+
+</div>
+<%= form_for [ Comment.new], :html => {:class => "w-50"}, remote: true do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :post_id, value: post.id %>
+  <p class="emoji-picker-container">
+  <%= f.text_area :comments, class: "form-control ",data: { emojiable: true } %>
+  </p>
+  <%=f.submit "commet"%>
+<% end %>
