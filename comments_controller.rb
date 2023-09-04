@@ -9,9 +9,10 @@ class CommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.create(param[:id])
+    @comment = @post.comments.create(comment_params)
+
     if @comment.save
-      @post = @comment.post
+      redirect_to post_path(@post)
       flash[:notice] = "Successfully created"
     else
       flash[:notice] = "something went wrong"
@@ -29,6 +30,6 @@ class CommentsController < ApplicationController
   end
   private
   def comment_params
-    param.require(:comment).permit(:comments)
+    params .require(:comment).permit(:message)
   end
 end

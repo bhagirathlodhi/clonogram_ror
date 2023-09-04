@@ -1,0 +1,8 @@
+<%= form_with model: [ @post, @post.comments.build ] do |form| %>
+  <p>
+    <%= form.label :message %><br>
+    <%= form.text_field :message, class: "form-control form-control-lg"%>
+  </p>
+    <%= form.submit class: "btn btn-primary btn-lg" %>
+  </p>
+<% end %>

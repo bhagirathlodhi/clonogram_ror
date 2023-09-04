@@ -9,9 +9,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @user = User.find_by(id: current_user.id)
+    @post = @user.posts.new(post_params)
+
     if @post.save
       redirect_to root_path, notice: 'post has been created successfully'
+    else
+      render :new
     end
 
   end
@@ -38,9 +42,8 @@ class PostsController < ApplicationController
     redirect_to root_path, notice: "Post deleted"
   end
 
-
   private
   def post_params
-    params.require(:post).permit(:title, :description, :post_image)
+    params.require(:post).permit(:title, :description)
   end
 end
